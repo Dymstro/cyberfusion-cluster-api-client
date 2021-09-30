@@ -253,4 +253,32 @@ class UnixUsers extends Endpoint
             'unixUser' => $unixUser,
         ]);
     }
+
+    /**
+     * @param int $id
+     * @return Response
+     * @throws RequestException
+     */
+    public function disableAsync(int $id): Response
+    {
+        // Log the affected cluster by retrieving the model first
+        $result = $this->get($id);
+        if ($result->isSuccess()) {
+            $clusterId = $result
+                ->getData('unixUser')
+                ->getClusterId();
+
+            $this
+                ->client
+                ->addAffectedCluster($clusterId);
+        }
+
+        $request = (new Request())
+            ->setMethod(Request::METHOD_DELETE)
+            ->setUrl(sprintf('unix-users/%d/async-support', $id));
+
+        return $this
+            ->client
+            ->request($request);
+    }
 }
