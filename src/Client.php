@@ -18,8 +18,18 @@ use Vdhicts\Cyberfusion\ClusterApi\Support\Deployment;
 
 class Client implements ClientContract
 {
+    // Project settings
+
+    public const NAME_PROJECT = 'cyberfusion-cluster-api-client';
+
+    // Request options
+
     private const CONNECT_TIMEOUT = 60;
     private const TIMEOUT = 180;
+
+    private const PREFIX_USER_AGENT = self::NAME_PROJECT . '-php';
+
+    // Init objects
 
     private Configuration $configuration;
     private GuzzleClient $httpClient;
@@ -210,18 +220,38 @@ class Client implements ClientContract
     private function getRequestOptions(Request $request): array
     {
         $requestOptions = [];
+
+        // Set body based on content type
+
         if ($request->getBodySchema() === Request::BODY_SCHEMA_JSON) {
             $requestOptions['json'] = $request->getBody();
         } else {
             $requestOptions['form_params'] = $request->getBody();
         }
+
+        // Add authorization header to headers
+
         if ($request->authenticationRequired()) {
-            $requestOptions['headers'] = [
-                'Authorization' => sprintf('Bearer %s', $this->configuration->getAccessToken()),
-            ];
+            $requestOptions['headers']['Authorization'] => sprintf('Bearer %s', $this->configuration->getAccessToken());
         }
 
+        // Add user agent to headers
+
+        $requestOptions['headers']['User-Agent'] = $this->getUserAgent;
+
         return $requestOptions;
+    }
+
+    /**
+     * Construct the user agent string.
+     *
+     * @return string
+     */
+    private function getUserAgent(): string
+    {
+        // TODO: Add version
+
+        return self::PREFIX_USER_AGENT;
     }
 
     /**
