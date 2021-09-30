@@ -138,6 +138,7 @@ class FpmPools extends Endpoint
                 'max_requests',
                 'process_idle_timeout',
                 'cpu_limit',
+                'unit_name',
                 'id',
                 'cluster_id',
             ]));
