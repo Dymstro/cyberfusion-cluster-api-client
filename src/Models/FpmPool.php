@@ -127,7 +127,7 @@ class FpmPool extends ClusterModel implements Model
         return $this->unitName;
     }
 
-    public function setUnitName(int $unitName): FpmPool
+    public function setUnitName(string $unitName): FpmPool
     {
         $this->unitName = $unitName;
 
