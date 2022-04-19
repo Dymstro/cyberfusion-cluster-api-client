@@ -14,7 +14,7 @@ class Cluster extends ClusterModel implements Model
     private array $phpVersions = [];
     private array $customPhpModulesNames = [];
     private ?bool $phpIoncubeEnabled = null;
-    private ?array $nodejsVersions = [];
+    private array $nodejsVersions = [];
     private ?string $customerId = null;
     private ?bool $wordpressToolkitEnabled = null;
     private ?bool $databaseToolkitEnabled = null;
