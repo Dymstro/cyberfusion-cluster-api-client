@@ -106,7 +106,7 @@ class VirtualHost extends ClusterModel implements Model
 
     public function getPassengerAppId(): ?int
     {
-        return $this->fpmPoolId;
+        return $this->passengerAppId;
     }
 
     public function setPassengerAppId(?int $passengerAppId): VirtualHost

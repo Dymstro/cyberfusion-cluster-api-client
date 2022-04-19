@@ -111,12 +111,12 @@ class Cluster extends ClusterModel implements Model
 
     public function getNodejsVersions(): array
     {
-        return $this->NodejsVersions;
+        return $this->nodejsVersions;
     }
 
-    public function setNodejsVersions(array $NodejsVersions): Cluster
+    public function setNodejsVersions(array $nodejsVersions): Cluster
     {
-        $this->NodejsVersions = $NodejsVersions;
+        $this->nodejsVersions = $nodejsVersions;
 
         return $this;
     }

@@ -82,7 +82,7 @@ class PassengerApps extends Endpoint
             'startup_file',
         ]);
 
-        $request = $this
+        $request = (new Request())
             ->setMethod(Request::METHOD_POST)
             ->setUrl('passenger-apps/nodejs')
             ->setBody($this->filterFields($passengerApp->toArray(), [
@@ -167,7 +167,7 @@ class PassengerApps extends Endpoint
         // Log which cluster is affected by this change
         $this
             ->client
-            ->addAffectedCluster($response->getClusterId());
+            ->addAffectedCluster($passengerApp->getClusterId());
 
         return $response->setData([
             'passengerApp' => $passengerApp,
