@@ -12,7 +12,7 @@ class PassengerApp extends ClusterModel implements Model
 {
     private string $name;
     private int $unixUserId;
-    private string $environment = PassengerEnvironment::DEVELOPMENT;
+    private string $environment = PassengerEnvironment::PRODUCTION;
     private array $environmentVariables = [];
     private int $maxPoolSize;
     private int $maxRequests;
